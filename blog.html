@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpg" href="/img/blog/primne.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minecraft Blog</title>
+    
+    
+  </head>
+  
+  <body>
+          <canvas id="bg"></canvas>
+
+    <main>
+      <header>
+        <a href="./index.html">Inicio</a>
+        <a href="./blog.html">Blog</a>
+        <a href="https://www.minecraft.net/es-es/article/what-minecraft" target="_blank">Más</a>
+      </header>
+      <section class="textbox" id="txb1">
+        <img src="/img/minecraft.png" alt="Logo de minecraft" id="nombre">
+        <h1>¡Deja tus comentarios, experiencias, y sugerencias sobre Minecraft aquí!</h1>
+      </section>
+      <section class="textbox" id="txb5">
+        <h3>Ingresa tu opinion o comentario</h3>
+            <form id="comentarioForm">
+                <input type="text" id="username" placeholder="Tu nombre de usuario" required maxlength="50"/>
+                <textarea id="comment" placeholder="Tu comentario" required maxlength="500"></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+      </section>
+      <section class="textbox" id="txb6">
+        <h2>Comentarios:</h2>
+        <br>
+        <div id="commentsContainer"></div>
+      </section>
+    </main>
+    <footer>
+      <p>Publicado en 2025</p>
+      <p>Hecho por <a href="https://github.com/G10sr" target="_blank">Giovanni Sánchez Román</a></p>
+    </footer>
+        <script type="module" src="/src/blog.js"></script>
+        <script type="module" src="/src/db.js"></script>
+  </body>
+</html>
