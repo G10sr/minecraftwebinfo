@@ -29,7 +29,7 @@ const form = document.getElementById('comentarioForm');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-const username = document.getElementById('username').value.trim();
+  const username = document.getElementById('username').value.trim();
   const comment = document.getElementById('comment').value.trim();
 
   if (!username || !comment) {
@@ -38,37 +38,50 @@ const username = document.getElementById('username').value.trim();
   }
 
   try {
-    await addDoc(collection(db, "comentarios"), {
-      username,
-      comment
+    const res = await fetch('/addComment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, comment })
     });
+
+    if (!res.ok) {
+      throw new Error('Error al enviar comentario');
+    }
+
     alert("Comentario enviado correctamente.");
     form.reset();
-    await leerComentarios(); 
+    await leerComentarios();
+
   } catch (error) {
-    console.error("Error al enviar comentario:", error);
+    console.error(error);
     alert("Error al enviar comentario.");
   }
 });
 
 async function leerComentarios() {
   try {
-    const querySnapshot = await getDocs(collection(db, "comentarios"));
-    const comments = [];
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      if (data && Object.keys(data).length > 0) {
-        comments.push(data);
-      } else {
-        console.warn("Documento vacío o inválido:", doc.id);
-      }
+    const res = await fetch('/firestore'); // Función de Cloudflare que creaste
+    if (!res.ok) {
+      throw new Error('Error al obtener comentarios');
+    }
+    const data = await res.json();
+
+    // La estructura de data será la que devuelve Firestore REST API,
+    // así que extraemos los campos necesarios:
+    const comments = (data.documents || []).map(doc => {
+      const fields = doc.fields || {};
+      return {
+        username: fields.username?.stringValue || 'Anon',
+        comment: fields.comment?.stringValue || ''
+      };
     });
+
     mostrarComentarios(comments);
+
   } catch (error) {
-    console.error("Error al leer comentarios:", error);
+    console.error(error);
   }
 }
-
 function mostrarComentarios(comments) {
   commentsContainer.innerHTML = ''; 
   comments.forEach(({ username, comment }) => {
