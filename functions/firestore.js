@@ -1,17 +1,21 @@
 export async function onRequest(context) {
-  const projectId = context.env.FIREBASE_PROJECT_ID;
+  const projectId = context.env.VITE_API_FIREBASE_PROJECT_ID;
+
+  if (!projectId) {
+    return new Response('VITE_API_FIREBASE_PROJECT_ID no está definido', { status: 500 });
+  }
 
   const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/comentarios`;
 
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json'
-      // No Authorization header porque no usas token
     }
   });
 
   if (!res.ok) {
-    return new Response('Error fetching data from Firestore', { status: 500 });
+    const errorText = await res.text();
+    return new Response(`Error fetching data from Firestore: ${errorText}`, { status: 500 });
   }
 
   const data = await res.json();

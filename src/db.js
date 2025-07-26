@@ -64,7 +64,7 @@ async function leerComentarios() {
     if (!res.ok) {
       throw new Error('Error al obtener comentarios');
     }
-    const data = await res.json();
+    const data = await res.text();
 
     // La estructura de data será la que devuelve Firestore REST API,
     // así que extraemos los campos necesarios:

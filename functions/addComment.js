@@ -3,7 +3,7 @@ export async function onRequest(context) {
     return new Response('Método no permitido', { status: 405 });
   }
 
-  const projectId = context.env.FIREBASE_PROJECT_ID;
+  const projectId = context.env.FIREBASE_PROJECT_ID; // o VITE_API_FIREBASE_PROJECT_ID si así lo usas
 
   const body = await context.request.json();
   const { username, comment } = body;
@@ -12,7 +12,6 @@ export async function onRequest(context) {
     return new Response('Faltan datos', { status: 400 });
   }
 
-  // Construye el payload para Firestore
   const data = {
     fields: {
       username: { stringValue: username },
