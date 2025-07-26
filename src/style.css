@@ -59,7 +59,8 @@ header a{
   margin-left: 4vw;
 }
 #nombre{
-  height: 20vh;
+  position: relative;
+  max-width: 36vw;
   z-index: 4;
   width: fit-content;
   margin-bottom: 10vh;
