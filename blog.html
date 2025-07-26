@@ -42,5 +42,16 @@
     </footer>
       <script type="module" src="/src/blog.js"></script>
     <script type="module" src="/src/db.js"></script>
+    <script type="module">
+      function resizeCanvas() {
+        const canvas = document.querySelector('canvas');
+        canvas.style.height = `${window.innerHeight}px`;
+        canvas.style.width = `${window.innerWidth}px`;
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      window.addEventListener('orientationchange', resizeCanvas);
+      window.addEventListener('load', resizeCanvas);
+    </script>
   </body>
 </html>

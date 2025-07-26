@@ -66,5 +66,16 @@ El modo multijugador de *Minecraft* abre la puerta a un mundo compartido donde l
       <p>Publicado en 2025</p>
       <p>Hecho por <a href="https://github.com/G10sr" target="_blank">Giovanni Sánchez Román</a></p>
     </footer>
+    <script type="module">
+      function resizeCanvas() {
+        const canvas = document.querySelector('canvas');
+        canvas.style.height = `${window.innerHeight}px`;
+        canvas.style.width = `${window.innerWidth}px`;
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      window.addEventListener('orientationchange', resizeCanvas);
+      window.addEventListener('load', resizeCanvas);
+    </script>
   </body>
 </html>
