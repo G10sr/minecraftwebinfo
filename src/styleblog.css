@@ -53,6 +53,7 @@ header a{
 }
 #nombre{
   position: relative;
+  min-width: 36vw;
   max-width: 36vw;
   z-index: 4;
   width: fit-content;
